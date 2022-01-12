@@ -165,20 +165,20 @@ const db = mysql.createConnection(
     inquirer.prompt([{
     type: 'input',
     name: 'employee_id',
-    message: 'what is the role id of the role?',
+    message: 'what is the empolyee id of the role?',
   },{
     type: 'input',
-    name: 'manager_id',
-    message: 'what is the manager id of the role?',
+    name: 'role_id',
+    message: 'what is the role id of the role?',
   }]).then(function(result){
-    const sql = `INSERT INTO empolyee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
-    const params = [result.first_name, result.lsat_name, result.role_id, result.manager_id]
+    const sql = `UPDATE employee SET role_id = ? WHERE id = ?`;
+    const params = [result.role_id, result.employee_id]
     
     db.query(sql, params, (err, rows) => {
       if (err) {
           throw err
       }
-      console.log('added the empolyee')
+      console.log('Updated the empolyee')
       promptuser()
     });
   })
